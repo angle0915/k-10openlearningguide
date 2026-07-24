@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCU Basic Education Open Learning</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            /* MCU Brand & Complementary Colors */
+            --mcu-purple: #4A148C;
+            --mcu-purple-light: #7c43bd;
+            --mcu-accent: #FFB300; /* Amber/Gold */
+            --text-main: #2D3748;
+            --text-muted: #718096;
+            --bg-page: #F7FAFC;
+            --bg-card: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: var(--bg-page);
+        }
+
+        /* --- Sidebar Navigation --- */
+        nav.sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, var(--mcu-purple) 0%, #310b60 100%);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        nav.sidebar h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 20px;
+            color: var(--mcu-accent);
+            line-height: 1.4;
+        }
+
+        nav.sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav.sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        nav.sidebar ul li a {
+            color: #E2E8F0;
+            text-decoration: none;
+            font-size: 1.05rem;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out;
+            font-weight: 400;
+        }
+
+        nav.sidebar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--mcu-accent);
+            transform: translateX(5px);
+        }
+
+        /* --- Main Content Area --- */
+        main {
+            margin-left: 280px;
+            padding: 50px 20px;
+            width: calc(100% - 280px);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers the content wrapper */
+        }
+
+        /* Wrapper to center cards and control max-width */
+        .content-wrapper {
+            width: 100%;
+            max-width: 900px; /* Limits width for better readability */
+            display: flex;
+            flex-direction: column;
+        }
+
+        section {
+            background-color: var(--bg-card);
+            margin-bottom: 40px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #E2E8F0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* --- Typography --- */
+        h1 {
+            color: var(--mcu-purple);
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--mcu-accent);
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--bg-page);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--mcu-purple-light);
+            font-size: 1.4rem;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--mcu-accent);
+            color: #1A202C;
+            padding: 14px 28px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(255, 179, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #FFA000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 179, 0, 0.4);
+        }
+
+        /* --- Custom Boxes --- */
+        .welcome-banner {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 50px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-left: 6px solid var(--mcu-purple);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .step-box {
+            background-color: #F7FAFC;
+            padding: 25px;
+            border-left: 4px solid var(--mcu-accent);
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .notice-box {
+            background-color: #FFF5F5;
+            border: 1px solid #FEB2B2;
+            border-left: 5px solid #F56565;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            color: #C53030;
+            font-weight: 600;
+        }
+
+        .it-support-box {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #FFF5F5;
+            border: 1px solid #FEB2B2;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .it-support-box p {
+            margin-bottom: 5px;
+        }
+
+        .it-support-box strong {
+            color: #C53030;
+            font-size: 1.1rem;
+        }
+
+        /* --- Media & Links --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #111;
+            border-radius: 12px;
+            margin: 30px 0 10px 0;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-fallback {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 30px;
+            padding: 10px;
+            background-color: #EDF2F7;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .video-fallback a {
+            color: #3182CE;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .video-fallback a:hover {
+            text-decoration: underline;
+        }
+
+        .resource-link-box {
+            display: flex;
+            align-items: center;
+            background-color: #EDF2F7;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-decoration: none;
+            color: var(--mcu-purple);
+            font-weight: 600;
+            transition: background 0.2s;
+            border: 1px solid #CBD5E0;
+        }
+
+        .resource-link-box:hover {
+            background-color: #E2E8F0;
+            color: var(--mcu-purple-light);
+        }
+
+        /* --- Activity Box --- */
+        .activity-box {
+            background-color: #EBF8FF;
+            border: 2px solid #63B3ED;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .activity-box h2 {
+            color: #2B6CB0;
+            border-bottom: none;
+            margin-bottom: 10px;
+        }
+
+        .activity-box ol {
+            text-align: left;
+            margin: 20px auto;
+            max-width: 650px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid #E2E8F0;
+            color: #A0AEC0;
+            width: 100%;
+        }
+        
+        .footer-credits {
+            font-size: 0.65rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            nav.sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 20px;
+            }
+
+            nav.sidebar h2 {
+                margin-bottom: 15px;
+            }
+
+            main {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px 15px;
+            }
+
+            section, .welcome-banner, .activity-box {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <h2>MCU Basic Education<br>Open Learning</h2>
+        <ul>
+            <li><a href="#welcome">1. Welcome & Login</a></li>
+            <li><a href="#create-course">2. Creating a Course</a></li>
+            <li><a href="#modules-pages">3. Modules & Pages</a></li>
+            <li><a href="#widgets">4. Recommended Widgets</a></li>
+            <li><a href="#sections">5. Adding Sections & Classes</a></li>
+            <li><a href="#enroll">6. Enrolling Students</a></li>
+            <li><a href="#activity">7. Final Activity</a></li>
+            <li><a href="#help-concerns">8. Help & Concerns</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        
+        <div class="content-wrapper">
+            <!-- SECTION 1: Welcome & Login -->
+            <div id="welcome" class="welcome-banner">
+                <h1>Welcome to MCU Basic Education Open Learning!</h1>
+                <p>Hello Teachers! This guide will help you build highly engaging online courses for your Kinder to Grade 10 students inside the Manila Central University Basic Education Department.</p>
+                <p style="font-weight: 600; margin: 30px 0; font-size: 1.1rem;">To begin your journey, click the button below. It will launch a new tab opening the MCU OpenLearning login screen.</p>
+                <a href="https://centralino.mcu.edu.ph" target="_blank" class="btn">🚀 Start MCU OpenLearning</a>
+            </div>
+
+            <section>
+                <h2>How to Login Using Your School Microsoft Account</h2>
+                
+                <div class="step-box">
+                    <strong>Method 1: Login via Email Invitation</strong><br>
+                    Check your university inbox for an automated OpenLearning invitation. Click the provided Manila Central University homepage link, click the "Log in" button, select your MCU account, fill out your details, and start learning.
+                </div>
+                
+                <div class="step-box">
+                    <strong>Method 2: Direct Login (If No Email Received)</strong><br>
+                    If you didn't receive an activation email from the IT Department, simply go directly to the <a href="https://centralino.mcu.edu.ph" target="_blank">MCU OpenLearning page</a>. Click <strong>Log in</strong> and use your official Microsoft school account email and password to access the portal.
+                </div>
+
+                <div class="it-support-box">
+                    <p style="font-weight: 600;">Having trouble signing in?</p>
+                    <p>If you encounter any issues accessing the course and account in OpenLearning, please email at <strong>ict@mcu.edu.ph</strong></p>
+                </div>
+            </section>
+
+            <!-- SECTION 2: Creating a Course -->
+            <section id="create-course">
+                <h2>How to Create a Course</h2>
+                <p>Before you begin designing, please watch this comprehensive walkthrough video.</p>
+                
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/KT4OXyPvUgU" title="OpenLearning Course Creator Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-fallback">
+                    <em>Experiencing Error 153 or a blank screen? Your browser's adblocker may be blocking the player. <a href="https://www.youtube.com/watch?v=KT4OXyPvUgU" target="_blank">Click here to watch the walkthrough directly on YouTube.</a></em>
+                </div>
+                
+                <h3>Step-by-Step Procedure: Starting Your Course</h3>
+                <ol>
+                    <li>From your main MCU Dashboard, click the <strong>Create a Course</strong> button.</li>
+                    <li>Enter the basic details (Course Name, Subject).</li>
+                    <li><strong>Start with Learning Outcomes:</strong> Clearly define what your students will achieve by the end of the term. Outline these in the Setup Wizard.</li>
+                    <li><strong>Setting up Your Course Homepage:</strong> Your course landing page is vital! Customize this page to include a summary, expected outcomes, and an overview of your modules.</li>
+                </ol>
+                
+                <!-- Interactive Visual Links -->
+                <a href="https://help.openlearning.com/t/x1g29n/1-start-with-learning-outcomes" target="_blank" class="resource-link-box">
+                    &#128248; Learn more about: Starting with Learning Outcomes
+                </a>
+                <a href="https://help.openlearning.com/t/x1pdkm/6-setting-up-your-course-homepage" target="_blank" class="resource-link-box">
+                    &#128248; Learn more about: Setting Up Your Course Homepage
+                </a>
+            </section>
+
+
+            <!-- SECTION 3: Modules & Pages -->
+            <section id="modules-pages">
+                <h2>Understanding Modules and Course Pages</h2>
+                <p>The <strong>Content Tab</strong> is where you organize your term. Here is how to construct a logical flow for basic education students:</p>
+                
+                <div class="step-box">
+                    <strong>1. Setting up your Course Modules:</strong><br>
+                    Break down your subjects into manageable Modules (e.g., "Quarter 1", "Quarter 2", or "Week 1"). This keeps students from feeling overwhelmed.
+                </div>
+                <div class="step-box">
+                    <strong>2. Understanding Course Pages:</strong><br>
+                    Inside each module, you will add "Pages". A page is where your course content and learning activities actually live. Think of a page as a single lesson for the day.
+                </div>
+                <div class="step-box">
+                    <strong>3. Using Page Templates & Design Patterns:</strong><br>
+                    To save time and keep a consistent look for your young learners, you can use built-in page templates.
+                </div>
+
+                <!-- Interactive Visual Links -->
+                <a href="https://help.openlearning.com/t/18pdl6/2-setting-up-your-course-modules" target="_blank" class="resource-link-box">
+                    &#128248; Learn more about: Setting Up Modules
+                </a>
+                <a href="https://help.openlearning.com/t/k9pdlm/3-understanding-course-pages" target="_blank" class="resource-link-box">
+                    &#128248; Learn more about: Understanding Course Pages
+                </a>
+                <a href="https://help.openlearning.com/t/35h6sv1/7-how-do-i-use-page-templates-and-learning-design-patterns" target="_blank" class="resource-link-box">
+                    &#128248; Learn more about: Using Page Templates
+                </a>
+            </section>
+
+            <!-- SECTION 4: Recommended Widgets -->
+            <section id="widgets">
+                <h2>Adding Content, Resources & Recommended Widgets</h2>
+                <p>Widgets are interactive blocks you can drag and drop onto your course pages. They allow you to add text, images, videos, files, and more.</p>
+
+                <h3>For Kinder to Grade 6 (Focus on Visuals & Simple Interactions)</h3>
+                <ul>
+                    <li><strong>Text & Image Widgets:</strong> Use lots of colorful images. Keep text paragraphs short and font sizes large.</li>
+                    <li><strong>Video Widget:</strong> Embed sing-along videos, animated stories, or your own recorded mini-lectures.</li>
+                    <li><strong>Matching Activity Widget:</strong> Great for vocabulary, identifying shapes, or matching animals to habitats.</li>
+                    <li><strong>Simple Quiz Widget (Multiple Choice):</strong> Add immediate feedback for younger students so they feel rewarded.</li>
+                </ul>
+
+                <h3>For Grade 7 to Grade 10 (Focus on Collaboration & Critical Thinking)</h3>
+                <ul>
+                    <li><strong>Share / Discussion Widgets:</strong> Perfect for designing great activities where students can debate a topic and learn from each other.</li>
+                    <li><strong>File Submission Widget:</strong> Use this for essays, projects, and presentation slides.</li>
+                    <li><strong>Advanced Quizzes & Checklists:</strong> Help older students track their own progress through self-assessment widgets.</li>
+                </ul>
+
+                <!-- Interactive Visual Links -->
+                <a href="https://help.openlearning.com/t/x1pdfx/4-adding-content-and-resources" target="_blank" class="resource-link-box">
+                    &#128248; Learn more about: Adding Content & Resources
+                </a>
+                <a href="https://help.openlearning.com/t/80pdl0/5-designing-great-activities" target="_blank" class="resource-link-box">
+                    &#128248; Learn more about: Designing Great Activities
+                </a>
+            </section>
+
+
+                <!-- SECTION 5: Adding Sections & Classes -->
+            <section id="sections">
+                <h2>How to Add Sections and Classes</h2>
+                <p>To organize your handled advisories or subject sections properly within your course settings, follow these steps:</p>
+                
+                <div class="step-box">
+                    <strong>Step-by-Step Guide:</strong><br>
+                    1. Go to your course dashboard and click on <strong>Course Setup</strong> on the left side panel.<br>
+                    2. Select and click on <strong>Classes</strong>.<br>
+                    3. Click the <strong>Create New Class</strong> button to add the specific sections of the classes you handled.
+                </div>
+            </section>
+
+            <!-- SECTION 6: Enrolling Students -->
+            <section id="enroll">
+                <h2>How to Enroll a Student</h2>
+                
+                <div class="notice-box">
+                    ⚠️ <strong>Note for New Teachers:</strong> You can safely skip this step for now! Our students may not all be fully registered with OpenLearning yet. You can focus entirely on building your course content first.
+                </div>
+
+                <p>Once your students are registered and your course is published, here is how you will let them in:</p>
+                
+                <div class="step-box">
+                    <strong>Method 1: Inviting via Email</strong><br>
+                    1. Navigate to the <strong>Administer Students</strong> tab on the left-hand menu.<br>
+                    2. Click on <strong>Learners</strong>.<br>
+                    3. Click the <strong>Invite Learners</strong> button.<br>
+                    4. Paste the MCU Microsoft email addresses of your students and click send.
+                </div>
+
+                <div class="step-box">
+                    <strong>Method 2: Using a Course Link (Recommended for Grade 7-10)</strong><br>
+                    1. Go to your Course Settings.<br>
+                    2. Ensure your course privacy allows for student enrollment.<br>
+                    3. Copy the <strong>Course URL</strong> from your landing page and distribute it to your class group chats or channels.
+                </div>
+            </section>
+
+            <!-- SECTION 7: Final Activity -->
+            <section id="activity" class="activity-box">
+                <h2>🎯 Final Activity: Create Your Own Course!</h2>
+                <p>Now it is your turn to apply what you've learned. As a final step in your onboarding, please complete the following activity:</p>
+                
+                <ol>
+                    <li><strong>Log in:</strong> Go to <a href="https://centralino.mcu.edu.ph" target="_blank">MCU OpenLearning</a> and log in.</li>
+                    <li><strong>Create a Course:</strong> Click "Create a Course" and name it according to the subject you will be teaching this school year.</li>
+                    <li><strong>Set Up the Landing Page:</strong> Use the syllabus that you created for this schoool year as your guide. Fill out the course summary and expected outcomes on your homepage.</li>
+                    <li><strong>Build One Module:</strong> Create your "Quarter 1" module and add at least one page for your first lesson.</li>
+                    <li><strong>Add Widgets:</strong> On your page, Drag and drop at least one <em>Text Widget</em>, one <em>Image Widget</em>, and one interaction widget suitable for your grade level.</li>
+                    <li><strong>Post Your Outline:</strong> For your very first post/page in the module, we highly recommend you <strong>post your 1st Quarter Course Outline</strong> to set clear expectations for your students.</li>
+                </ol>
+                <p><em>Note: Use your attached syllabus strictly as a reference to fill in the textual content on your landing page and module structure!</em></p>
+                <br>
+                <a href="https://centralino.mcu.edu.ph" target="_blank" class="btn">Start Your Activity Now</a>
+            </section>
+
+            <!-- SECTION 8: Help & Concerns -->
+            <section id="help-concerns">
+                <h2>Help & Reporting OpenLearning Concerns</h2>
+                <p>If you encounter any issues, bugs, or need assistance regarding OpenLearning usage, student tracking, or technical concerns, please submit a report through our dedicated concern portal:</p>
+                <div style="text-align: center; margin-top: 25px;">
+                    <a href="https://k10msconcerns.k10mcu.workers.dev/" target="_blank" class="btn">🛠️ Open K-10 Concern Portal</a>
+                </div>
+            </section>
+
+            <!-- Footer Section -->
+            <footer>
+                <p class="footer-credits">Prepared by: Junian Engel M. Molbog | School Year 2026-2027</p>
+            </footer>
+
+        </div> <!-- End of content-wrapper -->
+    </main>
+
+</body>
+</html>
